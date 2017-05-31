@@ -49,6 +49,8 @@ public class WeatherService {
             String jsonData = response.body().string();
             if(response.isSuccessful()){
                 JSONObject weatherJSON = new JSONObject(jsonData);
+                JSONObject city = weatherJSON.getJSONObject("city");
+                DailyForecast.apiLocation = city.getString("name") + ", " + city.getString("country");
                 JSONArray forecastListJSON = weatherJSON.getJSONArray("list");
                 for(int i = 0; i< forecastListJSON.length(); i++){
                     JSONObject forecastJSON = forecastListJSON.getJSONObject(i);

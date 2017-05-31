@@ -1,12 +1,19 @@
 package com.example.guest.weatherdroid.models;
 
+import android.util.Log;
+
 import org.parceler.Parcel;
 
 import java.io.Serializable;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 @Parcel
 public class DailyForecast {
+    static public String apiLocation;
     public String mDate;
     public String mIconCode;
     public String mHigh;
@@ -26,7 +33,10 @@ public class DailyForecast {
     }
 
     public String getDate() {
-        return mDate;
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
+        Date currentDate = new Date(Long.valueOf(mDate) * 1000);
+        String prettyDate = sdf.format(currentDate);
+        return prettyDate;
     }
 
     public String getImageUrl() {
@@ -34,18 +44,29 @@ public class DailyForecast {
     }
 
     public String getHigh() {
-        return mHigh;
+        return "High: " + mHigh + " F";
     }
 
     public String getLow() {
-        return mLow;
+        return "Low: " + mLow + " F";
     }
 
     public String getHumidity() {
-        return mHumidity;
+        return "Humidity: " + mHumidity + "%";
     }
 
     public String getDescription() {
-        return mDescription;
+        String cap = mDescription.substring(0, 1).toUpperCase() + mDescription.substring(1);
+        return cap;
+    }
+
+    String getMonthForInt(int num) {
+        String month = "wrong";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11 ) {
+            month = months[num];
+        }
+        return month;
     }
 }

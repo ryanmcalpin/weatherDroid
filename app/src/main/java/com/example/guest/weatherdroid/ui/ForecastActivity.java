@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.guest.weatherdroid.R;
 import com.example.guest.weatherdroid.adapters.ForecastListAdapter;
@@ -23,6 +24,7 @@ import okhttp3.Response;
 
 public class ForecastActivity extends AppCompatActivity {
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+    @Bind(R.id.locationTitle) TextView mLocationTitle;
 
     public static final String TAG = ForecastActivity.class.getSimpleName();
     public ArrayList<DailyForecast> forecasts = new ArrayList<>();
@@ -55,6 +57,7 @@ public class ForecastActivity extends AppCompatActivity {
                 ForecastActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mLocationTitle.setText(DailyForecast.apiLocation);
                         mAdapter = new ForecastListAdapter(getApplicationContext(), forecasts);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ForecastActivity.this);
