@@ -6,8 +6,10 @@ import com.example.guest.weatherdroid.Constants;
 import com.example.guest.weatherdroid.models.DailyForecast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.Call;
@@ -54,12 +56,18 @@ public class WeatherService {
                     String high = forecastJSON.getJSONObject("temp").getString("max");
                     String low = forecastJSON.getJSONObject("temp").getString("min");
                     String humidity = forecastJSON.getString("humidity");
-                    String iconCode = forecastJSON.getJSONObject("weather").getString("icon");
-                    String description = forecastJSON.getJSONObject("weather").getString("description");
+                    String iconCode = forecastJSON.getJSONArray("weather").getJSONObject(0).getString("icon");
+                    String description = forecastJSON.getJSONArray("weather").getJSONObject(0).getString("description");
                     DailyForecast forecast = new DailyForecast(date, iconCode, high, low, humidity, description);
+                    Log.d("WEATHER SERVICE", date);
                     forecasts.add(forecast);
                 }
             }
+        }catch (IOException e){
+            e.printStackTrace();
+        } catch (JSONException e){
+            e.printStackTrace();
         }
+        return forecasts;
     }
 }

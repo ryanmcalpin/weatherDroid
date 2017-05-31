@@ -22,10 +22,11 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ForecastActivity extends AppCompatActivity {
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+
     public static final String TAG = ForecastActivity.class.getSimpleName();
     public ArrayList<DailyForecast> forecasts = new ArrayList<>();
     private ForecastListAdapter mAdapter;
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
 
     @Override
@@ -33,8 +34,10 @@ public class ForecastActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
         ButterKnife.bind(this);
+
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
+
         getForecasts(location);
     }
 
@@ -54,7 +57,7 @@ public class ForecastActivity extends AppCompatActivity {
                     public void run() {
                         mAdapter = new ForecastListAdapter(getApplicationContext(), forecasts);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(ForecastActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ForecastActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
                     }

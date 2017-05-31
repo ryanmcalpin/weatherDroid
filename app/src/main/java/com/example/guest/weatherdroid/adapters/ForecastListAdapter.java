@@ -35,7 +35,7 @@ public class ForecastListAdapter extends RecyclerView.Adapter<ForecastListAdapte
     }
 
     @Override
-    public void onBindViewHolder (ForecastListAdapter.ForecastViewHolder holder, int position){
+    public void onBindViewHolder(ForecastListAdapter.ForecastViewHolder holder, int position){
         holder.bindForecast(forecasts.get(position));
     }
 
