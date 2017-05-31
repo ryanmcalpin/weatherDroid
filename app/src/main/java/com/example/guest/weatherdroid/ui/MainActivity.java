@@ -1,12 +1,13 @@
-package com.example.guest.weatherdroid;
+package com.example.guest.weatherdroid.ui;
 
 import android.content.Intent;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.guest.weatherdroid.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

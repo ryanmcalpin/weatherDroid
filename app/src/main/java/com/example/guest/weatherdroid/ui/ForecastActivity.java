@@ -1,9 +1,11 @@
-package com.example.guest.weatherdroid;
+package com.example.guest.weatherdroid.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.example.guest.weatherdroid.R;
 
 public class ForecastActivity extends AppCompatActivity {
 
